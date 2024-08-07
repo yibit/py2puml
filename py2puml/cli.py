@@ -19,6 +19,11 @@ def run():
     argparser.add_argument('-v', '--version', action='version', version='py2puml 0.9.1')
     argparser.add_argument('path', metavar='path', type=str, help='the filepath to the domain')
     argparser.add_argument('module', metavar='module', type=str, help='the module name of the domain', default=None)
+    argparser.add_argument('theme', metavar='theme', type=str, help='the theme of plantuml file', default="skin rose")
+    argparser.add_argument('author', metavar='author', type=str, help='the author of plantuml file', default="py2puml")
 
     args = argparser.parse_args()
-    print(''.join(py2puml(args.path, args.module)))
+    if args.theme != "skin rose":
+        args.theme = "!theme " + args.theme
+
+    print(''.join(py2puml(args.path, args.module, args.theme, args.author)))
